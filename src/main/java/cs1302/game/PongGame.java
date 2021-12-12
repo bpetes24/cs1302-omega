@@ -6,6 +6,20 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.control.ToolBar;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import javafx.event.Event;
+import javafx.event.ActionEvent;
+import javafx.util.Duration;
+import javafx.scene.robot.Robot;
+import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 
 /**
  * This class is a {@link Game} for building a single-player "Pong!" game.
