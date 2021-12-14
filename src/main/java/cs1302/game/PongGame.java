@@ -42,12 +42,18 @@ import javafx.scene.control.Separator;
  */
 public class PongGame extends Game {
 
+    private static final int width = 800;
+    private static final int height = 600;
+    private static final int PLAYER_HEIGHT = 15;
+    private static final int PLAYER_WIDTH = 100;
+    private static final double BALL_R = 15;
+
     protected Rectangle playerOne; //Represents the user/player
     protected Rectangle playerTwo; //Represents the computer/opponent
-    protected Rectangle ball;        //Represents the ball to be played
-    private int playerOneScore; //Represents player one's score
-    private int playerTwoScore; //Represents player two's score
-    private int scoreToWin;     //Represents the score needed to win
+    protected Circle ball;         //Represents the ball to be played
+    private int playerOneScore;    //Represents player one's score
+    private int playerTwoScore;    //Represents player two's score
+    private int scoreToWin;        //Represents the score needed to win
 
     /**
      * Constructs a {@code PongGame} object.
@@ -55,12 +61,12 @@ public class PongGame extends Game {
      * @param width - scene width
      * @param height - scene height
      */
-    public PongGame(int width, int height) {
+    public PongGame() {
         super(width, height, 60);
         setLogLevel(Level.INFO);
-        this.playerOne = new Rectangle(10, 50);
-        this.playerTwo = new Rectangle(10, 50);
-        this.Ball = new Rectangle();
+        this.playerOne = new Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT, Color.WHITE);
+        this.playerTwo = new Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT, Color.WHITE);
+        this.ball = new Circle(BALL_R, Color.WHITE);
         this.playerOneScore = 0;
         this.playerTwoScore = 0;
         this.scoreToWin = 10;
@@ -73,7 +79,13 @@ public class PongGame extends Game {
      */
     @Override
     protected void init() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        getChildren().addAll(playerOne, playerTwo, ball);
+        //Setup player one
+        playerOne.setX(width / 2);
+        playerOne.setY(height - PLAYER_HEIGHT);
+        //Setup player two
+        playerTwo.setX(width / 2);
+        playerTwo.setY(0);
     } //init
 
     /**
@@ -85,5 +97,52 @@ public class PongGame extends Game {
     protected void update() {
         throw new UnsupportedOperationException("Not yet implemented");
     } //update
+
+    /**
+     * Returns true if a player has won the game (i.e., their score is
+     * equal to the score needed to win).
+     *
+     * @param player - the player that has won the game
+     * @return true - if a player has won the game
+     */
+    protected boolean isWon(Rectangle player) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    } //isWon
+
+    /**
+     * Returns player one's score.
+     *
+     * @return playerOneScore - player one's current score
+     */
+    public int getPlayerOneScore() {
+        return playerOneScore;
+    } //getPlayerOneScore
+
+    /**
+     * Sets player one's score to a new score.
+     *
+     * @param score - player one's new score
+     */
+    public void setPlayerOneScore(int score) {
+        this.playerOneScore = score;
+    } //setPlayerOneScore
+
+    /**
+     * Returns player two's score.
+     *
+     * @return playerTwoScore - player two's current score
+     */
+    public int getPlayerTwoScore() {
+        return playerTwoScore;
+    } //getPlayerTwoScore
+
+    /**
+     * Sets player two's score to a new score.
+     *
+     * @param score - player two's new score
+     */
+    public void setPlayerTwoScore(int score) {
+        this.playerTwoScore = score;
+    } //setPlayerTwoScore
 
 } //class
