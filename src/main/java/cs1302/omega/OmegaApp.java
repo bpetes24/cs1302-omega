@@ -1,10 +1,12 @@
 package cs1302.omega;
 
 import cs1302.game.PongGame;
+import cs1302.game.GameBar;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -24,10 +26,12 @@ public class OmegaApp extends Application {
     @Override
     public void start(Stage stage) {
 
+        GameBar gameBar = new GameBar();
         PongGame game = new PongGame(1280, 720);
+        HBox courBox = new HBox();
 
         // setup scene
-        VBox root = new VBox(game);
+        VBox root = new VBox(gameBar, game);
         Scene scene = new Scene(root);
 
         // setup stage

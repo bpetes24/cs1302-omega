@@ -42,8 +42,12 @@ import javafx.scene.control.Separator;
  */
 public class PongGame extends Game {
 
-    private Rectangle playerOne; //Rectangle representing player one (the user)
-    private Rectangle playerTwo; //Rectangle representing player two (the opponent)
+    protected Player playerOne; //Represents the user/player
+    protected Player playerTwo; //Represents the computer/opponent
+    protected Ball ball;        //Represents the ball to be played
+    private int playerOneScore; //Represents player one's score
+    private int playerTwoScore; //Represents player two's score
+    private int scoreToWin;     //Represents the score needed to win
 
     /**
      * Constructs a {@code PongGame} object.
@@ -53,9 +57,13 @@ public class PongGame extends Game {
      */
     public PongGame(int width, int height) {
         super(width, height, 60);
-        setLogLevel(Level.info);
-        this.playerOne = new Rectangle(30, 5);
-        this.playerTwo = new Rectangle(30, 5);
+        setLogLevel(Level.INFO);
+        this.playerOne = new Player();
+        this.playerTwo = new Player();
+        this.Ball = new Ball();
+        this.playerOneScore = 0;
+        this.playerTwoScore = 0;
+        this.scoreToWin = 10;
     } //PongGame
 
     /**
