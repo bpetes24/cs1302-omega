@@ -23,7 +23,6 @@ public class GameBar extends HBox {
         super(4);
         this.scoreBoxOne = new HBox();
         this.scoreOne = 0;
-        scoreOne.setAlignment(Pos.Center);
     } //GameBar
 
 } //class

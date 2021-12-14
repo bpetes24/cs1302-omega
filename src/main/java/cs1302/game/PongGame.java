@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -86,6 +87,9 @@ public class PongGame extends Game {
         //Setup player two
         playerTwo.setX(width / 2);
         playerTwo.setY(0);
+        //Setup ball
+        ball.setCenterX(width / 2);
+        ball.setCenterY(height / 2);
     } //init
 
     /**
@@ -95,54 +99,37 @@ public class PongGame extends Game {
      */
     @Override
     protected void update() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        //Update player position
+        isKeyPressed( KeyCode.LEFT, () -> playerOne.setX(playerOne.getX() - 10.0));
+        isKeyPressed(KeyCode.RIGHT, () -> playerOne.setX(playerOne.getX() + 10.0));
     } //update
 
     /**
      * Returns true if a player has won the game (i.e., their score is
      * equal to the score needed to win).
      *
-     * @param player - the player that has won the game
      * @return true - if a player has won the game
      */
-    protected boolean isWon(Rectangle player) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    protected boolean isWon() {
+        if ((score(playerOne) == scoreToWin) || (score(playerTwo) == scoreToWin)) {
+            return true;
+        }
+        return false;
     } //isWon
 
     /**
-     * Returns player one's score.
+     * Returns the score of the specified player.
      *
-     * @return playerOneScore - player one's current score
+     * @param player - a player in the game
+     * @return score - the score of the specified player
      */
-    public int getPlayerOneScore() {
-        return playerOneScore;
-    } //getPlayerOneScore
-
-    /**
-     * Sets player one's score to a new score.
-     *
-     * @param score - player one's new score
-     */
-    public void setPlayerOneScore(int score) {
-        this.playerOneScore = score;
-    } //setPlayerOneScore
-
-    /**
-     * Returns player two's score.
-     *
-     * @return playerTwoScore - player two's current score
-     */
-    public int getPlayerTwoScore() {
-        return playerTwoScore;
-    } //getPlayerTwoScore
-
-    /**
-     * Sets player two's score to a new score.
-     *
-     * @param score - player two's new score
-     */
-    public void setPlayerTwoScore(int score) {
-        this.playerTwoScore = score;
-    } //setPlayerTwoScore
-
+    public int score(Rectangle player) {
+        int score = 0;
+        if (player.equals(playerOne)) {
+            score = this.playerOneScore;
+        } else if (player.equals(playerTwo)) {
+            score = this.playerTwoScore;
+        } //if
+        return score;
+    } //score
 } //class

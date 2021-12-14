@@ -7,8 +7,14 @@ import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.Event;
+
 import javafx.geometry.Bounds;
 import javafx.geometry.BoundingBox;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import javafx.scene.layout.CornerRadii;
+import javafx.geometry.Insets;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -36,6 +42,8 @@ public abstract class Game extends Region {
     private final Duration fpsTarget;                // target duration for game loop
     private final Timeline loop = new Timeline();    // timeline for main game loop
     private final BitSet keysPressed = new BitSet(); // set of currently pressed keys
+    private final BackgroundFill fill;
+    private final Background bg;
 
     private boolean initialized = false;             // play() has been called?
 
@@ -50,6 +58,9 @@ public abstract class Game extends Region {
         setMinWidth(width);
         setMinHeight(height);
         this.bounds = new BoundingBox(0, 0, width, height);
+        this.fill = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
+        this.bg = new Background(fill);
+        setBackground(bg);
         this.fpsTarget = Duration.millis(1000.0 / fps);
         addEventFilter(KeyEvent.KEY_PRESSED, event -> handleKeyPressed(event));
         addEventFilter(KeyEvent.KEY_RELEASED, event -> handleKeyReleased(event));
