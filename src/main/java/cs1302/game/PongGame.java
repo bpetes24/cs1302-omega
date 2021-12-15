@@ -47,11 +47,10 @@ public class PongGame extends Game {
     private static final int height = 600;
     private static final int PLAYER_HEIGHT = 15;
     private static final int PLAYER_WIDTH = 100;
-    private static final double BALL_R = 7.5;
 
     protected Rectangle playerOne; //Represents the user/player
     protected Rectangle playerTwo; //Represents the computer/opponent
-    protected Circle ball;         //Represents the ball to be played
+    protected Ball ball;           //Represents the ball to be played
     private int playerOneScore;    //Represents player one's score
     private int playerTwoScore;    //Represents player two's score
     private int scoreToWin;        //Represents the score needed to win
@@ -67,7 +66,7 @@ public class PongGame extends Game {
         setLogLevel(Level.INFO);
         this.playerOne = new Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT, Color.WHITE);
         this.playerTwo = new Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT, Color.WHITE);
-        this.ball = new Circle(BALL_R, Color.WHITE);
+        this.ball = new Ball(this);
         this.playerOneScore = 0;
         this.playerTwoScore = 0;
         this.scoreToWin = 10;
@@ -100,8 +99,10 @@ public class PongGame extends Game {
     @Override
     protected void update() {
         //Update player position
-        isKeyPressed( KeyCode.LEFT, () -> playerOne.setX(playerOne.getX() - 10.0));
-        isKeyPressed(KeyCode.RIGHT, () -> playerOne.setX(playerOne.getX() + 10.0));
+        isKeyPressed( KeyCode.LEFT, () -> playerOne.setX(playerOne.getX() - 5.0));
+        isKeyPressed(KeyCode.RIGHT, () -> playerOne.setX(playerOne.getX() + 5.0));
+        //Update ball position
+        ball.update();
     } //update
 
     /**
@@ -111,11 +112,18 @@ public class PongGame extends Game {
      * @return true - if a player has won the game
      */
     protected boolean isWon() {
-        if ((getPlayerOneScore() == scoreToWin) || (getPlayerTwoScore() == scoreToWin)) {
+        if (getPlayerOneScore() == scoreToWin) {
             return true;
         } //if
         return false;
     } //isWon
+
+    protected boolean isLoss() {
+        if (getPlayerTwoScore() == scoreToWin) {
+            return true;
+        } //if
+        return false;
+    } //isLoss
 
     /**
      * Returns the score of player one.
