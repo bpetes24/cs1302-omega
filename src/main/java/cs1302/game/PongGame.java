@@ -59,7 +59,7 @@ public class PongGame extends Game {
         //setLogLevel(Level.INFO);
         this.playerOne = new Player(this);
         this.playerTwo = new Player(this);
-        this.ball = new Ball(this);
+        this.ball = new Ball(this, playerOne, playerTwo);
         this.playerOneScore = 0;
         this.playerTwoScore = 0;
         this.scoreToWin = 10;
