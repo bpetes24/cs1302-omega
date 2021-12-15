@@ -37,7 +37,7 @@ public class Ball extends Circle {
         } else if (ballBounds.getMinX() < gameBounds.getMinX()) {
             ballXSpeed *= -1.0;
         } //if
-        setCenterX(getCenterX() + ballXSpeed);
+        setCenterY(getCenterY() + ballYSpeed);
     } //update
 
 } //class
