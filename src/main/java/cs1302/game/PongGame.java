@@ -5,9 +5,6 @@ import java.util.logging.Level;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Circle;
-import javafx.scene.control.ToolBar;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -18,9 +15,6 @@ import javafx.scene.paint.Color;
 import javafx.event.Event;
 import javafx.event.ActionEvent;
 import javafx.util.Duration;
-import javafx.scene.robot.Robot;
-import javafx.scene.control.Button;
-import javafx.scene.control.Separator;
 
 /**
  * This class is a {@link Game} for building a single-player "Pong!" game.
@@ -45,13 +39,11 @@ public class PongGame extends Game {
 
     private static final int width = 800;
     private static final int height = 600;
-    private static final int PLAYER_HEIGHT = 15;
-    private static final int PLAYER_WIDTH = 100;
-    private static final double BALL_R = 7.5;
 
-    protected Rectangle playerOne; //Represents the user/player
-    protected Rectangle playerTwo; //Represents the computer/opponent
-    protected Circle ball;         //Represents the ball to be played
+    protected Player playerOne;    //Represents the user/player
+    protected Player playerTwo;    //Represents the computer/opponent
+    protected Ball ball;           //Represents the ball to be played
+
     private int playerOneScore;    //Represents player one's score
     private int playerTwoScore;    //Represents player two's score
     private int scoreToWin;        //Represents the score needed to win
@@ -64,10 +56,10 @@ public class PongGame extends Game {
      */
     public PongGame() {
         super(width, height, 60);
-        setLogLevel(Level.INFO);
-        this.playerOne = new Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT, Color.WHITE);
-        this.playerTwo = new Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT, Color.WHITE);
-        this.ball = new Circle(BALL_R, Color.WHITE);
+        //setLogLevel(Level.INFO);
+        this.playerOne = new Player(this);
+        this.playerTwo = new Player(this);
+        this.ball = new Ball(this, playerOne, playerTwo);
         this.playerOneScore = 0;
         this.playerTwoScore = 0;
         this.scoreToWin = 10;
@@ -82,10 +74,10 @@ public class PongGame extends Game {
     protected void init() {
         getChildren().addAll(playerOne, playerTwo, ball);
         //Setup player one
-        playerOne.setX((width / 2) - (PLAYER_WIDTH / 2));
-        playerOne.setY(height - PLAYER_HEIGHT);
+        playerOne.setX((width / 2) - (playerOne.getWidth() / 2));
+        playerOne.setY(height - playerOne.getHeight());
         //Setup player two
-        playerTwo.setX((width / 2) - (PLAYER_WIDTH / 2));
+        playerTwo.setX((width / 2) - (playerTwo.getWidth() / 2));
         playerTwo.setY(0);
         //Setup ball
         ball.setCenterX(width / 2);
@@ -93,15 +85,20 @@ public class PongGame extends Game {
     } //init
 
     /**
-     * Updates the scene graph/game board with player positions.
+     * Updates the scene graph/game board with player and ball positions.
      *
      * {@inheritDoc}
      */
     @Override
     protected void update() {
-        //Update player position
-        isKeyPressed( KeyCode.LEFT, () -> playerOne.setX(playerOne.getX() - 10.0));
-        isKeyPressed(KeyCode.RIGHT, () -> playerOne.setX(playerOne.getX() + 10.0));
+        //Update player one position
+        isKeyPressed( KeyCode.LEFT, () -> playerOne.setX(playerOne.getX() - 5.0));
+        isKeyPressed(KeyCode.RIGHT, () -> playerOne.setX(playerOne.getX() + 5.0));
+        //Update player two position
+        isKeyPressed(KeyCode.A, () -> playerTwo.setX(playerTwo.getX() - 5.0));
+        isKeyPressed(KeyCode.D, () -> playerTwo.setX(playerTwo.getX() + 5.0));
+        //Update ball position
+        ball.update();
     } //update
 
     /**
@@ -111,11 +108,18 @@ public class PongGame extends Game {
      * @return true - if a player has won the game
      */
     protected boolean isWon() {
-        if ((getPlayerOneScore() == scoreToWin) || (getPlayerTwoScore() == scoreToWin)) {
+        if (this.playerOneScore == scoreToWin) {
             return true;
         } //if
         return false;
     } //isWon
+
+    protected boolean isLoss() {
+        if (this.playerTwoScore == scoreToWin) {
+            return true;
+        } //if
+        return false;
+    } //isLoss
 
     /**
      * Returns the score of player one.

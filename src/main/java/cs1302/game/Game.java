@@ -42,8 +42,8 @@ public abstract class Game extends Region {
     private final Duration fpsTarget;                // target duration for game loop
     private final Timeline loop = new Timeline();    // timeline for main game loop
     private final BitSet keysPressed = new BitSet(); // set of currently pressed keys
-    private final BackgroundFill fill;
-    private final Background bg;
+    private final BackgroundFill fill;               // background fill for region
+    private final Background bg;                     // background for region
 
     private boolean initialized = false;             // play() has been called?
 
