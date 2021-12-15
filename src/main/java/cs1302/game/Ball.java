@@ -50,9 +50,13 @@ public class Ball extends Circle {
             ballXSpeed *= -1.0;
         } //if
 
-        if (ballBounds.getMaxY() > playerOneYPos) {
+        if (((ballBounds.getMaxY() > playerOneYPos) &&
+        ballBounds.getMaxX() >= playerOneXPos &&
+        ballBounds.getMaxX() <= playerOneXPos + playerOne.getWidth())) {
             ballYSpeed *= -1.0;
-        } else if (ballBounds.getMaxY() < playerTwoYPos) {
+        } else if (((ballBounds.getMaxY() < playerTwoYPos) &&
+        ballBounds.getMaxX() >= playerTwoXPos &&
+        ballBounds.getMaxX() <= playerTwoXPos + playerTwo.getWidth())) {
             ballYSpeed *= -1.0;
         } //if
 /*
