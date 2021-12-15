@@ -111,25 +111,28 @@ public class PongGame extends Game {
      * @return true - if a player has won the game
      */
     protected boolean isWon() {
-        if ((score(playerOne) == scoreToWin) || (score(playerTwo) == scoreToWin)) {
+        if ((getPlayerOneScore() == scoreToWin) || (getPlayerTwoScore() == scoreToWin)) {
             return true;
-        }
+        } //if
         return false;
     } //isWon
 
     /**
-     * Returns the score of the specified player.
+     * Returns the score of player one.
      *
-     * @param player - a player in the game
-     * @return score - the score of the specified player
+     * @return score - the score of player one
      */
-    public int score(Rectangle player) {
-        int score = 0;
-        if (player.equals(playerOne)) {
-            score = this.playerOneScore;
-        } else if (player.equals(playerTwo)) {
-            score = this.playerTwoScore;
-        } //if
-        return score;
-    } //score
+    public int getPlayerOneScore() {
+        return playerOneScore;
+    } //getPlayerOneScore
+
+    /**
+     * Returns the score of player two.
+     *
+     * @return score - the score of player two
+     */
+    public int getPlayerTwoScore() {
+        return playerTwoScore;
+    } //getPlayerOneScore
+
 } //class
