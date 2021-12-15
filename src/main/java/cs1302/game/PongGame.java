@@ -47,7 +47,7 @@ public class PongGame extends Game {
     private static final int height = 600;
     private static final int PLAYER_HEIGHT = 15;
     private static final int PLAYER_WIDTH = 100;
-    private static final double BALL_R = 15;
+    private static final double BALL_R = 7.5;
 
     protected Rectangle playerOne; //Represents the user/player
     protected Rectangle playerTwo; //Represents the computer/opponent
@@ -82,10 +82,10 @@ public class PongGame extends Game {
     protected void init() {
         getChildren().addAll(playerOne, playerTwo, ball);
         //Setup player one
-        playerOne.setX(width / 2);
+        playerOne.setX((width / 2) - (PLAYER_WIDTH / 2));
         playerOne.setY(height - PLAYER_HEIGHT);
         //Setup player two
-        playerTwo.setX(width / 2);
+        playerTwo.setX((width / 2) - (PLAYER_WIDTH / 2));
         playerTwo.setY(0);
         //Setup ball
         ball.setCenterX(width / 2);
