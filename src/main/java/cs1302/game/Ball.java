@@ -10,9 +10,11 @@ import javafx.scene.paint.Color;
  */
 public class Ball extends Circle {
 
-    private Game game;       //Game containing this object
-    private int ballXSpeed;  //Change in x per update
-    private int ballYSpeed;  //Change in y per update
+    private static final double BALL_R = 7.5; //Radius/size of the ball
+
+    private Game game;      //Game containing this object
+    private int ballXSpeed; //Change in x per update
+    private int ballYSpeed; //Change in y per update
 
     /**
      * Constructs a {@code Ball} object.
@@ -20,7 +22,7 @@ public class Ball extends Circle {
      * @param game - parent game
      */
     public Ball(Game game) {
-        super(7.5, Color.WHITE);
+        super(BALL_R, Color.WHITE);
         this.game = game;
         this.ballXSpeed = 1;
         this.ballYSpeed = 1;

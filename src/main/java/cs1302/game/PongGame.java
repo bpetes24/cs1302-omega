@@ -39,12 +39,11 @@ public class PongGame extends Game {
 
     private static final int width = 800;
     private static final int height = 600;
-    private static final int PLAYER_HEIGHT = 15;
-    private static final int PLAYER_WIDTH = 100;
 
-    protected Rectangle playerOne; //Represents the user/player
-    protected Rectangle playerTwo; //Represents the computer/opponent
+    protected Player playerOne;    //Represents the user/player
+    protected Player playerTwo;    //Represents the computer/opponent
     protected Ball ball;           //Represents the ball to be played
+
     private int playerOneScore;    //Represents player one's score
     private int playerTwoScore;    //Represents player two's score
     private int scoreToWin;        //Represents the score needed to win
@@ -57,9 +56,9 @@ public class PongGame extends Game {
      */
     public PongGame() {
         super(width, height, 60);
-        setLogLevel(Level.INFO);
-        this.playerOne = new Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT, Color.WHITE);
-        this.playerTwo = new Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT, Color.WHITE);
+        //setLogLevel(Level.INFO);
+        this.playerOne = new Player(this);
+        this.playerTwo = new Player(this);
         this.ball = new Ball(this);
         this.playerOneScore = 0;
         this.playerTwoScore = 0;
@@ -75,10 +74,10 @@ public class PongGame extends Game {
     protected void init() {
         getChildren().addAll(playerOne, playerTwo, ball);
         //Setup player one
-        playerOne.setX((width / 2) - (PLAYER_WIDTH / 2));
-        playerOne.setY(height - PLAYER_HEIGHT);
+        playerOne.setX((width / 2) - (playerOne.getWidth() / 2));
+        playerOne.setY(height - playerOne.getHeight());
         //Setup player two
-        playerTwo.setX((width / 2) - (PLAYER_WIDTH / 2));
+        playerTwo.setX((width / 2) - (playerTwo.getWidth() / 2));
         playerTwo.setY(0);
         //Setup ball
         ball.setCenterX(width / 2);
@@ -86,15 +85,18 @@ public class PongGame extends Game {
     } //init
 
     /**
-     * Updates the scene graph/game board with player positions.
+     * Updates the scene graph/game board with player and ball positions.
      *
      * {@inheritDoc}
      */
     @Override
     protected void update() {
-        //Update player position
+        //Update player one position
         isKeyPressed( KeyCode.LEFT, () -> playerOne.setX(playerOne.getX() - 5.0));
         isKeyPressed(KeyCode.RIGHT, () -> playerOne.setX(playerOne.getX() + 5.0));
+        //Update player two position
+        isKeyPressed(KeyCode.A, () -> playerTwo.setX(playerTwo.getX() - 5.0));
+        isKeyPressed(KeyCode.D, () -> playerTwo.setX(playerTwo.getX() + 5.0));
         //Update ball position
         ball.update();
     } //update
@@ -106,14 +108,14 @@ public class PongGame extends Game {
      * @return true - if a player has won the game
      */
     protected boolean isWon() {
-        if (getPlayerOneScore() == scoreToWin) {
+        if (this.playerOneScore == scoreToWin) {
             return true;
         } //if
         return false;
     } //isWon
 
     protected boolean isLoss() {
-        if (getPlayerTwoScore() == scoreToWin) {
+        if (this.playerTwoScore == scoreToWin) {
             return true;
         } //if
         return false;
