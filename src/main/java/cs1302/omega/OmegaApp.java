@@ -26,8 +26,8 @@ public class OmegaApp extends Application {
     @Override
     public void start(Stage stage) {
 
-        GameBar gameBar = new GameBar();
         PongGame game = new PongGame();
+        GameBar gameBar = new GameBar(game);
 
         // setup scene
         VBox root = new VBox(gameBar, game);
