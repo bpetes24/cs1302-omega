@@ -27,10 +27,9 @@ public class OmegaApp extends Application {
     public void start(Stage stage) {
 
         PongGame game = new PongGame();
-        GameBar gameBar = new GameBar(game);
 
         // setup scene
-        VBox root = new VBox(gameBar, game);
+        VBox root = new VBox(game);
         Scene scene = new Scene(root);
 
         // setup stage
