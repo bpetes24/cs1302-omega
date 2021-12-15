@@ -44,25 +44,35 @@ public class Ball extends Circle {
         double playerTwoXPos = playerTwo.getX();
         double playerTwoYPos = playerTwo.getY();
 
+        //If the ball hits the game's boundaries, then it bounces off at the same speed.
         if (ballBounds.getMaxX() > gameBounds.getMaxX()) {
             ballXSpeed *= -1.0;
         } else if (ballBounds.getMinX() < gameBounds.getMinX()) {
             ballXSpeed *= -1.0;
         } //if
 
-        //If the ball hits a player, then it bounces off.
+        //If the ball hits a player, then it bounces off at a greater speed.
         if (((ballBounds.getMaxY() > playerOneYPos) &&
         ballBounds.getMaxX() >= playerOneXPos &&
         ballBounds.getMaxX() <= playerOneXPos + playerOne.getWidth())) {
+            ballYSpeed++;
+            ballXSpeed++;
+            ballXSpeed *= -1.0;
             ballYSpeed *= -1.0;
         } else if (((ballBounds.getMinY() < playerTwoYPos + playerOne.getHeight()) &&
         ballBounds.getMinX() >= playerTwoXPos &&
         ballBounds.getMinX() <= playerTwoXPos + playerTwo.getWidth())) {
+            ballYSpeed--;
+            ballXSpeed--;
+            ballXSpeed *= -1.0;
             ballYSpeed *= -1.0;
         } //if
 /*
+        //If the ball passes either player, then a point is awarded and the ball resets.
         if (ballBounds.getMaxY() < playerOneYPos + playerOne.getHeight()) {
+            playerTwoScore++;
         } else if (ballBounds.getMinY() > playerTwoYPos - playerOne.getHeight()) {
+            playerOneScore++;
         } //if
 */
         setCenterY(getCenterY() + ballYSpeed);
