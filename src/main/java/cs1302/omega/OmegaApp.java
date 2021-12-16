@@ -40,7 +40,7 @@ public class OmegaApp extends Application {
         stage.show();
 
         // play the game
-        game.setOnMouseClicked(e -> game.play());
+        game.play();
 
     } // start
 

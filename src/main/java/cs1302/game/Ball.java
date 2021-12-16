@@ -59,15 +59,11 @@ public class Ball extends Circle {
         if (((ballBounds.getMaxY() > playerOneYPos) &&
         ballBounds.getMaxX() >= playerOneXPos &&
         ballBounds.getMaxX() <= playerOneXPos + playerOne.getWidth())) {
-            ballYSpeed++;
-            ballXSpeed++;
             ballXSpeed *= -1.0;
             ballYSpeed *= -1.0;
         } else if (((ballBounds.getMinY() < playerTwoYPos + playerOne.getHeight()) &&
         ballBounds.getMinX() >= playerTwoXPos &&
         ballBounds.getMinX() <= playerTwoXPos + playerTwo.getWidth())) {
-            ballYSpeed--;
-            ballXSpeed--;
             ballXSpeed *= -1.0;
             ballYSpeed *= -1.0;
         } //if
