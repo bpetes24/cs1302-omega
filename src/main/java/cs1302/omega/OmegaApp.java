@@ -1,7 +1,6 @@
 package cs1302.omega;
 
 import cs1302.game.PongGame;
-import cs1302.game.GameBar;
 
 import javafx.application.Application;
 import javafx.application.Platform;

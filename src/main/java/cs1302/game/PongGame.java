@@ -37,8 +37,8 @@ import javafx.util.Duration;
  */
 public class PongGame extends Game {
 
-    private static final int width = 800;
-    private static final int height = 600;
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 600;
 
     protected Player playerOne;    //Represents the user/player
     protected Player playerTwo;    //Represents the computer/opponent
@@ -50,12 +50,9 @@ public class PongGame extends Game {
 
     /**
      * Constructs a {@code PongGame} object.
-     *
-     * @param width - scene width
-     * @param height - scene height
      */
     public PongGame() {
-        super(width, height, 60);
+        super(WIDTH, HEIGHT, 60);
         //setLogLevel(Level.INFO);
         this.playerOne = new Player(this);
         this.playerTwo = new Player(this);
@@ -74,14 +71,14 @@ public class PongGame extends Game {
     protected void init() {
         getChildren().addAll(playerOne, playerTwo, ball);
         //Setup player one
-        playerOne.setX((width / 2) - (playerOne.getWidth() / 2));
-        playerOne.setY(height - playerOne.getHeight());
+        playerOne.setX((WIDTH / 2) - (playerOne.getWidth() / 2));
+        playerOne.setY(HEIGHT - playerOne.getHeight());
         //Setup player two
-        playerTwo.setX((width / 2) - (playerTwo.getWidth() / 2));
+        playerTwo.setX((WIDTH / 2) - (playerTwo.getWidth() / 2));
         playerTwo.setY(0);
         //Setup ball
-        ball.setCenterX(width / 2);
-        ball.setCenterY(height / 2);
+        ball.setCenterX(WIDTH / 2);
+        ball.setCenterY(HEIGHT / 2);
     } //init
 
     /**
@@ -102,10 +99,10 @@ public class PongGame extends Game {
     } //update
 
     /**
-     * Returns true if a player has won the game (i.e., their score is
+     * Returns true if player one has won the game (i.e., their score is
      * equal to the score needed to win).
      *
-     * @return true - if a player has won the game
+     * @return true - if player one has won the game
      */
     protected boolean isWon() {
         if (this.playerOneScore == scoreToWin) {
@@ -114,6 +111,12 @@ public class PongGame extends Game {
         return false;
     } //isWon
 
+    /**
+     * Returns true if player two has won the game (i.e., their score is
+     * equal to the score needed to win).
+     *
+     * @return true - if player two has won the game
+     */
     protected boolean isLoss() {
         if (this.playerTwoScore == scoreToWin) {
             return true;

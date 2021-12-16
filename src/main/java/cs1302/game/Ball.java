@@ -24,6 +24,8 @@ public class Ball extends Circle {
      * Constructs a {@code Ball} object.
      *
      * @param game - parent game
+     * @param playerOne - the first player in the game
+     * @param playerTwo - the second player in the game
      */
     public Ball(Game game, Player playerOne, Player playerTwo) {
         super(BALL_R, Color.WHITE);
@@ -57,13 +59,13 @@ public class Ball extends Circle {
 
         //If the ball hits a player, then it bounces off a greater speed.
         if (((ballBounds.getMaxY() > playerOneYPos) &&
-        ballBounds.getMaxX() >= playerOneXPos &&
-        ballBounds.getMaxX() <= playerOneXPos + playerOne.getWidth())) {
+            ballBounds.getMaxX() >= playerOneXPos &&
+            ballBounds.getMaxX() <= playerOneXPos + playerOne.getWidth())) {
             ballXSpeed *= -1.0;
             ballYSpeed *= -1.0;
         } else if (((ballBounds.getMinY() < playerTwoYPos + playerOne.getHeight()) &&
-        ballBounds.getMinX() >= playerTwoXPos &&
-        ballBounds.getMinX() <= playerTwoXPos + playerTwo.getWidth())) {
+            ballBounds.getMinX() >= playerTwoXPos &&
+            ballBounds.getMinX() <= playerTwoXPos + playerTwo.getWidth())) {
             ballXSpeed *= -1.0;
             ballYSpeed *= -1.0;
         } //if
@@ -92,6 +94,8 @@ public class Ball extends Circle {
      * Sets the ball position at the beginning of each round as well as its
      * initial direction, which alternates from one side to another based
      * on whose turn it is.
+     *
+     * @param whoseTurn - which of the players is receiving the ball first
      */
     public void setBall(boolean whoseTurn) {
         throw new UnsupportedOperationException("Not yet implemented");
