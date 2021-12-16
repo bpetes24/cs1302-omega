@@ -28,7 +28,7 @@ public class OmegaApp extends Application {
 
         PongGame game = new PongGame();
 
-        // setup scene
+        // Setup game scene
         VBox root = new VBox(game);
         Scene scene = new Scene(root);
 
@@ -40,7 +40,7 @@ public class OmegaApp extends Application {
         stage.show();
 
         // play the game
-        game.play();
+        game.setOnMouseClicked(e -> game.play());
 
     } // start
 
